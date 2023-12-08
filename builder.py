@@ -16,10 +16,18 @@ def process_line(input):
                 
                 # Extract the title
                 title = soup.title.string if soup.title else "No title found"
-                
-                print(f"The title of the page is: {title}")
+                sections = title.split("by")
+
+                name = sections[0].strip()
+                group = sections[1].split("::")[0].strip()
+
+                demozoo_raw = str(soup.find("li", {"id": "demozooID"}))
+                demozoo_url = demozoo_raw.split("[")[1].split("]")[0]
+ 
+                return(f"{name} by {group} for (<a href=\"{input}\">pouet</a>) ({demozoo_url})")
+ 
             else:
-                print(f"Failed to fetch URL. Status code: {response.status_code}")
+                return("")
 
 
         except requests.RequestException as e:
@@ -33,4 +41,5 @@ else:
 
     with open(file_path, 'r') as file:
         for line in file:
-            process_line(line.strip())  # .strip() removes extra newline characters
+            output = process_line(line.strip())  # .strip() removes extra newline characters
+            print(output)
