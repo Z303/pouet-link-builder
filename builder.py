@@ -42,25 +42,22 @@ def process_links(input_url, soup):
     return(f"(<a href=\"{input_url}\">pouet</a>) ({demozoo_url})")
 
 
-def process_line(input):
-    POUET_PROD_TAG = "https://www.pouet.net/prod.php?which="
+def process_line(input_url):
+    pouet_prod_tag = "https://www.pouet.net/prod.php?which="
 
-    if input.startswith(POUET_PROD_TAG):
+    if input_url.startswith(pouet_prod_tag):
         try:
-            response = requests.get(input)
+            response = requests.get(input_url)
 
             # Check if the request was successful (status code 200)
             if response.status_code == 200:
                 # Parse the HTML content
                 soup = BeautifulSoup(response.content, 'html.parser')
 
-                demozoo_raw = str(soup.find("li", {"id": "demozooID"}))
-                demozoo_url = demozoo_raw.split("[")[1].split("]")[0]
-
                 name = process_name(soup)
                 group = process_group(soup)
                 platform = process_platform(soup)
-                links = process_links(input, soup)  
+                links = process_links(input_url, soup) 
 
                 return(f"{name} by {group} for {platform} {links}")
  
