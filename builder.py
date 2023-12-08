@@ -52,4 +52,4 @@ else:
     with open(file_path, 'r') as file:
         for line in file:
             output = process_line(line.strip())  # .strip() removes extra newline characters
-            print(output)
+            print(f"<li>{output}</li>")
