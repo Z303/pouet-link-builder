@@ -35,6 +35,13 @@ def process_platform(soup):
     return(f"{platform}")
 
 
+def process_links(input_url, soup):
+    demozoo_raw = str(soup.find("li", {"id": "demozooID"}))
+    demozoo_url = demozoo_raw.split("[")[1].split("]")[0]
+
+    return(f"(<a href=\"{input_url}\">pouet</a>) ({demozoo_url})")
+
+
 def process_line(input):
     POUET_PROD_TAG = "https://www.pouet.net/prod.php?which="
 
@@ -53,8 +60,9 @@ def process_line(input):
                 name = process_name(soup)
                 group = process_group(soup)
                 platform = process_platform(soup)
+                links = process_links(input, soup)  
 
-                return(f"{name} by {group} for {platform} (<a href=\"{input}\">pouet</a>) ({demozoo_url})")
+                return(f"{name} by {group} for {platform} {links}")
  
             else:
                 return("")
