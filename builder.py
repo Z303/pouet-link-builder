@@ -24,7 +24,17 @@ def process_line(input):
                 demozoo_raw = str(soup.find("li", {"id": "demozooID"}))
                 demozoo_url = demozoo_raw.split("[")[1].split("]")[0]
  
-                return(f"{name} by {group} for (<a href=\"{input}\">pouet</a>) ({demozoo_url})")
+                listOfAllLinks = soup.findAll('a')
+                youtube = ""
+
+                for link in listOfAllLinks:                  
+                    if "youtube" in link:
+                        youtube = (link['href'])
+          
+                platform_raw = str(soup.find("span", {"class": "platform"}))
+                platform = platform_raw.split(">")[1].split("<")[0]
+
+                return(f"<a href=\"{youtube}\">{name}</a> by {group} for {platform} (<a href=\"{input}\">pouet</a>) ({demozoo_url})")
  
             else:
                 return("")
