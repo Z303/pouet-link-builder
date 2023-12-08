@@ -50,6 +50,8 @@ else:
     file_path = sys.argv[1]
 
     with open(file_path, 'r') as file:
+        print("<ul>")
         for line in file:
             output = process_line(line.strip())  # .strip() removes extra newline characters
             print(f"<li>{output}</li>")
+        print("</ul>")   
