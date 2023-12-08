@@ -28,6 +28,13 @@ def process_group(soup):
     return(f"{group}")  
 
 
+def process_platform(soup):
+    platform_raw = str(soup.find("span", {"class": "platform"}))
+    platform = platform_raw.split(">")[1].split("<")[0]
+
+    return(f"{platform}")
+
+
 def process_line(input):
     POUET_PROD_TAG = "https://www.pouet.net/prod.php?which="
 
@@ -42,12 +49,10 @@ def process_line(input):
 
                 demozoo_raw = str(soup.find("li", {"id": "demozooID"}))
                 demozoo_url = demozoo_raw.split("[")[1].split("]")[0]
-          
-                platform_raw = str(soup.find("span", {"class": "platform"}))
-                platform = platform_raw.split(">")[1].split("<")[0]
 
                 name = process_name(soup)
                 group = process_group(soup)
+                platform = process_platform(soup)
 
                 return(f"{name} by {group} for {platform} (<a href=\"{input}\">pouet</a>) ({demozoo_url})")
  
