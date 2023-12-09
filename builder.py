@@ -13,7 +13,7 @@ def process_name(soup):
     youtube = ""
 
     for link in list_of_all_links:                  
-        if "youtube" in link:
+        if "youtube" in link['href']:
             youtube = (link['href'])
 
     return(f"<a href=\"{youtube}\">{name}</a>")
