@@ -50,7 +50,9 @@ def process_platform(soup):
         platform = "JavaScript"
     elif (platform == "Gameboy"):
         platform = "the Nintendo Gameboy"
-    elif (platform != "iOS"):
+    elif (platform == "SNES/Super Famicom"):
+        platform = "the Nintendo SNES/Super Famicom"
+    elif (platform != "iOS") and (platform != "Android"):
         platform = "the " + platform
 
     return(f"{platform}")
