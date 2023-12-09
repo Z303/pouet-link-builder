@@ -1,5 +1,7 @@
 import requests
 import sys
+import time
+
 from bs4 import BeautifulSoup
 
 
@@ -13,7 +15,9 @@ def process_name(soup):
     youtube = ""
 
     for link in list_of_all_links:                  
-        if "youtube" in link:
+        if "youtube" in link['href']:
+            youtube = (link['href'])
+        elif "youtu.be" in link['href']:
             youtube = (link['href'])
 
     return(f"<a href=\"{youtube}\">{name}</a>")
@@ -32,12 +36,34 @@ def process_platform(soup):
     platform_raw = str(soup.find("span", {"class": "platform"}))
     platform = platform_raw.split(">")[1].split("<")[0]
 
+    if (platform == "Amiga OCS/ECS"):
+        platform = "OCS/ECS Amiga's"
+    elif (platform == "Amiga AGA"):
+        platform = "AGA Amiga's"        
+    elif (platform == "Windows"):
+        platform = "Windows PC's"
+    elif (platform == "MS-Dos"):
+        platform = "MS-DOS PC's"
+    elif (platform == "Commodore 64"):
+        platform = "the C-64"
+    elif (platform == "JavaScript"):
+        platform = "JavaScript"
+    elif (platform == "Gameboy"):
+        platform = "the Nintendo Gameboy"
+    elif (platform == "SNES/Super Famicom"):
+        platform = "the Nintendo SNES/Super Famicom"
+    elif (platform != "iOS") and (platform != "Android"):
+        platform = "the " + platform
+
     return(f"{platform}")
 
 
 def process_links(input_url, soup):
     demozoo_raw = str(soup.find("li", {"id": "demozooID"}))
-    demozoo_url = demozoo_raw.split("[")[1].split("]")[0]
+    if (demozoo_raw != "None"):
+        demozoo_url = demozoo_raw.split("[")[1].split("]")[0]
+    else:
+        demozoo_url = "<a href="">demozoo</a>"
 
     return(f"(<a href=\"{input_url}\">pouet</a>) ({demozoo_url})")
 
@@ -77,6 +103,7 @@ else:
     with open(file_path, 'r') as file:
         print("<ul>")
         for line in file:
-            output = process_line(line.strip())  # .strip() removes extra newline characters
+            output = process_line(line.strip())
             print(f"<li>{output}</li>")
+            time.sleep(1)
         print("</ul>")   
