@@ -38,6 +38,8 @@ def process_platform(soup):
 
     if (platform == "Amiga OCS/ECS"):
         platform = "OCS/ECS Amiga's"
+    elif (platform == "Amiga AGA"):
+        platform = "AGA Amiga's"        
     elif (platform == "Windows"):
         platform = "Windows PC's"
     elif (platform == "MS-Dos"):
@@ -46,6 +48,8 @@ def process_platform(soup):
         platform = "the C-64"
     elif (platform == "JavaScript"):
         platform = "JavaScript"
+    elif (platform == "Gameboy"):
+        platform = "the Nintendo Gameboy"
     elif (platform != "iOS"):
         platform = "the " + platform
 
