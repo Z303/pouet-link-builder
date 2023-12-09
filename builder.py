@@ -1,5 +1,7 @@
 import requests
 import sys
+import time
+
 from bs4 import BeautifulSoup
 
 
@@ -14,6 +16,8 @@ def process_name(soup):
 
     for link in list_of_all_links:                  
         if "youtube" in link['href']:
+            youtube = (link['href'])
+        elif "youtu.be" in link['href']:
             youtube = (link['href'])
 
     return(f"<a href=\"{youtube}\">{name}</a>")
@@ -88,4 +92,5 @@ else:
         for line in file:
             output = process_line(line.strip())  # .strip() removes extra newline characters
             print(f"<li>{output}</li>")
+            time.sleep(1)
         print("</ul>")   
