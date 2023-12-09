@@ -36,9 +36,9 @@ def process_platform(soup):
         platform = "OCS/ECS Amiga's"
     elif (platform == "Windows"):
         platform = "Windows PC's"
-    elif (platform == "MS-Dos "):
+    elif (platform == "MS-Dos"):
         platform = "MS-DOS PC's"
-    else:
+    elif (platform != "iOS"):
         platform = "the " + platform
 
     return(f"{platform}")
