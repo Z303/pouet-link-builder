@@ -44,6 +44,8 @@ def process_platform(soup):
         platform = "MS-DOS PC's"
     elif (platform == "Commodore 64"):
         platform = "the C-64"
+    elif (platform == "JavaScript"):
+        platform = "JavaScript"
     elif (platform != "iOS"):
         platform = "the " + platform
 
