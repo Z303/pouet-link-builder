@@ -32,6 +32,15 @@ def process_platform(soup):
     platform_raw = str(soup.find("span", {"class": "platform"}))
     platform = platform_raw.split(">")[1].split("<")[0]
 
+    if (platform == "Amiga OCS/ECS"):
+        platform = "OCS/ECS Amiga's"
+    elif (platform == "Windows"):
+        platform = "Windows PC's"
+    elif (platform == "MS-Dos "):
+        platform = "MS-DOS PC's"
+    else:
+        platform = "the " + platform
+
     return(f"{platform}")
 
 
