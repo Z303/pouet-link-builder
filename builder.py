@@ -60,7 +60,10 @@ def process_platform(soup):
 
 def process_links(input_url, soup):
     demozoo_raw = str(soup.find("li", {"id": "demozooID"}))
-    demozoo_url = demozoo_raw.split("[")[1].split("]")[0]
+    if (demozoo_raw != "None"):
+        demozoo_url = demozoo_raw.split("[")[1].split("]")[0]
+    else:
+        demozoo_url = ""
 
     return(f"(<a href=\"{input_url}\">pouet</a>) ({demozoo_url})")
 
@@ -100,7 +103,7 @@ else:
     with open(file_path, 'r') as file:
         print("<ul>")
         for line in file:
-            output = process_line(line.strip())  # .strip() removes extra newline characters
+            output = process_line(line.strip())
             print(f"<li>{output}</li>")
             time.sleep(1)
         print("</ul>")   
