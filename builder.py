@@ -63,7 +63,7 @@ def process_links(input_url, soup):
     if (demozoo_raw != "None"):
         demozoo_url = demozoo_raw.split("[")[1].split("]")[0]
     else:
-        demozoo_url = ""
+        demozoo_url = "<a href="">demozoo</a>"
 
     return(f"(<a href=\"{input_url}\">pouet</a>) ({demozoo_url})")
 
