@@ -85,7 +85,7 @@ def process_line(input_url):
                 platform = process_platform(soup)
                 links = process_links(input_url, soup) 
 
-                return(f"{name} by {group} for {platform} {links}")
+                return(f"{name} by {group} for {platform}. {links}")
  
             else:
                 return("")
